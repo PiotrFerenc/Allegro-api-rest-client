@@ -1,0 +1,9 @@
+﻿using System.Threading.Tasks;
+
+namespace AllegroApi.Service.Offer
+{
+    public interface IOfferService
+    {
+        Task<Domain.Offer> GetOfferById(string authorization, string offerId);
+    }
+}
