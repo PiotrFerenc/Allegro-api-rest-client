@@ -13,13 +13,20 @@ namespace ConsoleApp
 
             try
             {
-                var result = await allegroApi.Query(new GetOfferByIdQuery()
+
+                var result = await allegroApi.Query(new GetOfferEventsQuery()
                 {
-                    OfferId = "10862116958",
-                    Authorization = "authcode"
+                    Type = GetOfferEventsQuery.OfferEventType.OFFER_ACTIVATED,
+                    Authorization = "auth-code",
+                    Limit = 1000,
+                    From = "ID-EVENTU"
                 });
+
+                foreach (var item in result.offerEvents)
+                {
+                    Console.WriteLine(item.Offer.Id);
+                }
                 
-                Console.WriteLine(result.Name);
             }
             catch (Exception e)
             {
