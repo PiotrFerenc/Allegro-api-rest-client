@@ -9,7 +9,7 @@ using MediatR;
 
 namespace AllegroApi.Handler.Offer
 {
-    public class GetOfferByIdHandler : IRequestHandler<GetOfferByIdQuery, Domain.Offer>
+    public class GetOfferByIdHandler : IRequestHandler<GetOfferByIdQuery, Domain.Offer.Offer>
     {
         private readonly IOfferService _offerService;
 
@@ -18,7 +18,7 @@ namespace AllegroApi.Handler.Offer
             _offerService = offerService;
         }
 
-        public async Task<Domain.Offer> Handle(GetOfferByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Domain.Offer.Offer> Handle(GetOfferByIdQuery request, CancellationToken cancellationToken)
         {
             var validator = new GetOfferByIdQueryValidator();
             var validatorResult = await validator.ValidateAsync(request, cancellationToken);

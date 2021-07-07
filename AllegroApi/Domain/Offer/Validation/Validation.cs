@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AllegroApi.Domain
+namespace AllegroApi.Domain.Offer.Validation
 {
     public class Validation
     {

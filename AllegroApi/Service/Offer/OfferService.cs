@@ -15,9 +15,9 @@ namespace AllegroApi.Service.Offer
             _apiRepository = apiRepository;
         }
 
-        public async Task<Domain.Offer> GetOfferById(string authorization, string offerId)
+        public async Task<Domain.Offer.Offer> GetOfferById(string authorization, string offerId)
         {
-            var result = await _apiRepository.SendQuery<Domain.Offer>(new RequestQuery()
+            var result = await _apiRepository.SendQuery<Domain.Offer.Offer>(new RequestQuery()
             {
                 Uri = new Uri($"https://api.allegro.pl/sale/offers/{offerId}"),
                 Authorization = authorization,

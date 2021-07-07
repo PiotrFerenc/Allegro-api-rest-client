@@ -1,4 +1,4 @@
-﻿namespace AllegroApi.Domain
+﻿namespace AllegroApi.Domain.Offer.Category
 {
     public class Category
     {

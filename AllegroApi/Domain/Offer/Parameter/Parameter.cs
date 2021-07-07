@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AllegroApi.Domain
+namespace AllegroApi.Domain.Offer.Parameter
 {
     public class Parameter
     {

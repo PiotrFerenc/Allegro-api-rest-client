@@ -1,4 +1,4 @@
-﻿namespace AllegroApi.Domain
+﻿namespace AllegroApi.Domain.Offer.Price
 {
     public class Price
     {
