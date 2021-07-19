@@ -11,24 +11,22 @@ namespace AllegroApi
     {
         private IMediator Mediator { get; set; }
 
-        public AllegroRestClient( )
+        public AllegroRestClient()
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IApiRepository));
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IOfferService));
             builder.RegisterMediatR(typeof(AllegroRestClient).Assembly);
             var container = builder.Build();
-            
-            
+
+
             Mediator = container.Resolve<IMediator>();
         }
 
         public async Task<TResponse> Query<TResponse>(IRequest<TResponse> command)
         {
             var response = await Mediator.Send(command);
-            return   response;
+            return response;
         }
     }
-
-  
 }
