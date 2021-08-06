@@ -6,7 +6,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AllegroApi\AllegroApi.csproj" />
+      <PackageReference Include="Autofac" Version="6.2.0" />
+      <PackageReference Include="FluentResults" Version="2.5.0" />
+      <PackageReference Include="FluentValidation" Version="10.3.0" />
+      <PackageReference Include="MediatR" Version="9.0.0" />
+      <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="7.3.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="AllegroApi">
+        <HintPath>..\AllegroApi\bin\Release\net5.0\AllegroApi.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

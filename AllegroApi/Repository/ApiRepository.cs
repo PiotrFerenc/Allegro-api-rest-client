@@ -15,7 +15,8 @@ namespace AllegroApi.Repository
             var httpWebRequest = (HttpWebRequest) WebRequest.Create(query.Uri);
             httpWebRequest.ContentType = "application/vnd.allegro.public.v1+json";
             httpWebRequest.Accept = "application/vnd.allegro.public.v1+json";
-            httpWebRequest.Headers.Add("Authorization", "Bearer " +query.Authorization);
+            httpWebRequest.Headers.Add("Authorization", "Bearer " + query.Authorization);
+            httpWebRequest.ServerCertificateValidationCallback += (_, _, _, _) => true;
 
             httpWebRequest.Method = query.Method;
 
@@ -36,6 +37,10 @@ namespace AllegroApi.Repository
                 var deserializeObject = JsonConvert.DeserializeObject<T>(result);
 
                 return Result.Ok<T>(deserializeObject);
+            }
+            catch (WebException we)
+            {
+                return Result.Fail(we.Message);
             }
             catch (Exception e)
             {

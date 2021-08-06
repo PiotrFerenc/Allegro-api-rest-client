@@ -1,4 +1,4 @@
-﻿using AllegroApi.Query.Offer;
+﻿using AllegroApi.Query.AllegroOffer;
 using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
