@@ -4,21 +4,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroDeliveryMethods;
 using AllegroApi.Domain.Validator.QueryValidator;
-using AllegroApi.Query;
-using AllegroApi.Service.AllegroOffer;
+using AllegroApi.Query.SellerInformation;
+using AllegroApi.Service.SellerInformation;
 using MediatR;
 
-namespace AllegroApi.Handler
+namespace AllegroApi.Handler.SellerInformation
 {
     
     public class DeliveryMethodsHandler: IRequestHandler<GetDeliveryMethodsQuery, ListOfDeliveryMethods>
     {
-        private readonly IOfferService _offerService;
+        private readonly ISellerService _sellerService;
 
-        public DeliveryMethodsHandler(IOfferService offerService)
+        public DeliveryMethodsHandler(ISellerService sellerService)
         {
-            _offerService = offerService;
+            _sellerService = sellerService;
         }
+
 
         public async Task<ListOfDeliveryMethods> Handle(GetDeliveryMethodsQuery request, CancellationToken 
         cancellationToken)
@@ -31,7 +32,7 @@ namespace AllegroApi.Handler
                 throw new Exception(string.Join(", ", validatorResult.Errors.Select(x => x.ErrorMessage)));
             }
 
-            var result = await _offerService.GetDeliveryMethodsAsync(request.Authorization);
+            var result = await _sellerService.GetDeliveryMethodsAsync(request.Authorization);
 
             return result;
         }

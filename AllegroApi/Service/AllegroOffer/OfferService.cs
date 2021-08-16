@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
-using AllegroApi.Domain.AllegroDeliveryMethods;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.AllegroOffer.Result;
 using AllegroApi.Extensions;
@@ -136,21 +135,6 @@ namespace AllegroApi.Service.AllegroOffer
             return result;
         }
 
-        public async Task<ListOfDeliveryMethods> GetDeliveryMethodsAsync(string authorization)
-        {
-            var result = await _apiRepository.SendQuery<ListOfDeliveryMethods>(new RequestQuery()
-            {
-                Uri = new Uri("https://api.allegro.pl/sale/delivery-methods"),
-                Authorization = authorization,
-                Method = "GET"
-            });
-
-            if (result.IsFailed)
-            {
-                throw new Exception(string.Join(", ", result.Errors.Select(x => x.Message)));
-            }
-
-            return result.Value;
-        }
+      
     }
 }

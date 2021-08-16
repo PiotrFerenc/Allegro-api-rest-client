@@ -22,7 +22,7 @@ namespace AllegroApi.Repository
 
             // await using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             // {
-            //     await streamWriter.WriteAsync(JsonConvert.SerializeObject(query.Data));
+            //     await streamWriter.WriteAsync(JsonConvert.SerializeObject(query.Params));
             // }
 
             try

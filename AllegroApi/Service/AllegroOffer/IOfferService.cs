@@ -10,6 +10,5 @@ namespace AllegroApi.Service.AllegroOffer
         Task<Domain.AllegroOffer.Offer> GetOfferByIdAsync(string authorization, string offerId);
         Task<OfferEvents> GetOfferEventsAsync(string authorization,string from, int limit, GetOfferEventsQuery.OfferEventType type );
         Task<List<Domain.AllegroOffer.Offer>> GetOffersAsync(string authorization, PublicationStatus publicationStatus);
-        Task<Domain.AllegroDeliveryMethods.ListOfDeliveryMethods> GetDeliveryMethodsAsync(string authorization);
     }
 }

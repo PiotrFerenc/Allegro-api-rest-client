@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AllegroApi.Repository;
 using AllegroApi.Service.AllegroOffer;
+using AllegroApi.Service.SellerInformation;
 using Autofac;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
@@ -16,6 +17,7 @@ namespace AllegroApi
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IApiRepository));
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IOfferService));
+            builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(ISellerService));
             builder.RegisterMediatR(typeof(AllegroRestClient).Assembly);
             var container = builder.Build();
 

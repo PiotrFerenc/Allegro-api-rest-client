@@ -14,5 +14,6 @@ namespace AllegroApi.Extensions
 
             return uriBuilder.Uri;
         }
+        
     }
 }
