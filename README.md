@@ -81,7 +81,7 @@ var result = await allegroApi.Query(new GetSellerShippingRatesQuery()
  });
 ```
 
-Pobieranie gwarancje
+Warunki reklamacji
 
 ```c#
 var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
@@ -91,7 +91,25 @@ var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
 });
 ```
 
+Warunki zwrotów
 
+```c#
+var result = await allegroApi.Query(new GetReturnPoliciesQuery()
+{
+    Authorization = "auth-code",
+    SellerId = "123456"
+});
+```
+
+Informacje o gwarancji
+
+```c#
+var result = await allegroApi.Query(new GetWarrantiesQuery()
+{
+    Authorization = "auth-code",
+    SellerId = "123456"
+});
+```
 
 
 PS: NIE MA NAPISANYCH TESTÓW

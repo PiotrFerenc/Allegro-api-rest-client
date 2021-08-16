@@ -19,6 +19,7 @@
       <Folder Include="Domain\AllegroReturnPolicies" />
       <Folder Include="Domain\AllegroShippingRates\" />
       <Folder Include="Domain\AllegroImpliedWarranties" />
+      <Folder Include="Domain\AllegroWarranties" />
     </ItemGroup>
 
 </Project>
