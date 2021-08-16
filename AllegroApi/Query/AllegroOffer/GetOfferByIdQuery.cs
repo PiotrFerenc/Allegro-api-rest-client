@@ -3,9 +3,8 @@ using MediatR;
 
 namespace AllegroApi.Query.AllegroOffer
 {
-    public class GetOfferByIdQuery : IRequest<Offer>
+    public class GetOfferByIdQuery : AuthorizationToken, IRequest<Offer>
     {
-        public string OfferId { get; init; }
-        public string Authorization { get; init; }
+        public string OfferId { get; init; } 
     } 
 }

@@ -6,7 +6,7 @@ namespace AllegroApi.Query.AllegroOffer
     /// <summary>
     /// Dziennik zdarzeń w ofertach sprzedawcy
     /// </summary>
-    public class GetOfferEventsQuery : IRequest<OfferEvents>
+    public class GetOfferEventsQuery : AuthorizationToken, IRequest<OfferEvents>
     {
         /// <summary>
         /// from - podaj id eventu, by uzyskać wszystkie eventy które nastąpiły później 
@@ -22,8 +22,6 @@ namespace AllegroApi.Query.AllegroOffer
         /// type - podaj typ eventów, które chcesz uzyskać w odpowiedzi
         /// </summary>
         public OfferEventType Type { get; set; } = OfferEventType.NONE;
-        
-        public string Authorization { get; init; }
 
         public enum OfferEventType
         {
