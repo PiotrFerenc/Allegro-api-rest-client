@@ -60,6 +60,7 @@ var result = await allegroApi.Query(new GetAllOffersQuery()
 ------------------------------------------
 
 Pobieranie metod dostawy
+
 https://developer.allegro.pl/documentation/#operation/getListOfDeliveryMethodsUsingGET
 ```C#
 var result = await allegroApi.Query(new GetDeliveryMethodsQuery()
