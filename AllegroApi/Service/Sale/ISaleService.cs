@@ -8,6 +8,6 @@ namespace AllegroApi.Service.Sale
     {
         Task<Domain.AllegroDeliveryMethods.ListOfDeliveryMethods> GetDeliveryMethodsAsync(string authorization);
         Task<ShippingRates> GetSellerShippingAsync(string authorization, string sellerId);
-        Task<Warranties> GetImpliedWarrantiesAsync(string authorization, string sellerId);
+        Task<AllegroImpliedWarranties> GetImpliedWarrantiesAsync(string authorization, string sellerId);
     }
 }

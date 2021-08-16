@@ -55,11 +55,11 @@ namespace AllegroApi.Service.Sale
             return result.Value;
         }
         
-        public async Task<Warranties> GetImpliedWarrantiesAsync(string authorization, string sellerId)
+        public async Task<AllegroImpliedWarranties> GetImpliedWarrantiesAsync(string authorization, string sellerId)
         {
             var uri = new Uri("https://api.allegro.pl/after-sales-service-conditions/implied-warranties").AddParameter("seller.id", sellerId);
                 
-            var result = await _apiRepository.SendQuery<Warranties>(new RequestQuery()
+            var result = await _apiRepository.SendQuery<AllegroImpliedWarranties>(new RequestQuery()
             {
                 Uri = uri,
                 Authorization = authorization,
