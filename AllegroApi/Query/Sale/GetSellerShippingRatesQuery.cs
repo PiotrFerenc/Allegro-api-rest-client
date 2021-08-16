@@ -1,7 +1,7 @@
 ﻿using AllegroApi.Domain.AllegroShippingRates;
 using MediatR;
 
-namespace AllegroApi.Query.SellerInformation
+namespace AllegroApi.Query.Sale
 {
     public class GetSellerShippingRatesQuery : AuthorizationToken, IRequest<ShippingRates>
     {

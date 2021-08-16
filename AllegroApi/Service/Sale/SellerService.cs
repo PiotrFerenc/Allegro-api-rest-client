@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
@@ -8,13 +7,13 @@ using AllegroApi.Domain.AllegroShippingRates;
 using AllegroApi.Extensions;
 using AllegroApi.Repository;
 
-namespace AllegroApi.Service.SellerInformation
+namespace AllegroApi.Service.Sale
 {
-    public class SellerService : ISellerService
+    public class SaleService : ISaleService
     {
         private readonly IApiRepository _apiRepository;
 
-        public SellerService(IApiRepository apiRepository)
+        public SaleService(IApiRepository apiRepository)
         {
             _apiRepository = apiRepository;
         }
@@ -54,11 +53,5 @@ namespace AllegroApi.Service.SellerInformation
 
             return result.Value;
         }
-    }
-
-    public interface ISellerService
-    {
-        Task<Domain.AllegroDeliveryMethods.ListOfDeliveryMethods> GetDeliveryMethodsAsync(string authorization);
-        Task<ShippingRates> GetSellerShippingAsync(string authorization, string sellerId);
     }
 }

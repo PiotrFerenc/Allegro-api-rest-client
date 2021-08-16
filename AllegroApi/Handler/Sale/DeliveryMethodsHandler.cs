@@ -4,18 +4,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroDeliveryMethods;
 using AllegroApi.Domain.Validator.QueryValidator;
-using AllegroApi.Query.SellerInformation;
-using AllegroApi.Service.SellerInformation;
+using AllegroApi.Query.Sale;
+using AllegroApi.Service.Sale;
 using MediatR;
 
-namespace AllegroApi.Handler.SellerInformation
+namespace AllegroApi.Handler.Sale
 {
     
     public class DeliveryMethodsHandler: IRequestHandler<GetDeliveryMethodsQuery, ListOfDeliveryMethods>
     {
-        private readonly ISellerService _sellerService;
+        private readonly ISaleService _sellerService;
 
-        public DeliveryMethodsHandler(ISellerService sellerService)
+        public DeliveryMethodsHandler(ISaleService sellerService)
         {
             _sellerService = sellerService;
         }
