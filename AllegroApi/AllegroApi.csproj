@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <Folder Include="Domain\AllegroShippingRates\" />
+      <Folder Include="Domain\ImpliedWarranties" />
     </ItemGroup>
 
 </Project>

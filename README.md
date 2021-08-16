@@ -77,9 +77,21 @@ https://developer.allegro.pl/news/2018-08-14-cenniki_dostawy/#list
 var result = await allegroApi.Query(new GetSellerShippingRatesQuery()
 {
     Authorization = "auth-code",
-SellerId = "123456"
-    });
+    SellerId = "123456"
+ });
 ```
+
+Pobieranie gwarancje
+
+```c#
+var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
+{
+    Authorization = "auth-code",
+    SellerId = "123456"
+});
+```
+
+
 
 
 PS: NIE MA NAPISANYCH TESTÓW
