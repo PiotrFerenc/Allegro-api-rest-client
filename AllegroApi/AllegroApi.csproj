@@ -16,8 +16,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Domain\AllegroReturnPolicies" />
       <Folder Include="Domain\AllegroShippingRates\" />
-      <Folder Include="Domain\ImpliedWarranties" />
+      <Folder Include="Domain\AllegroImpliedWarranties" />
     </ItemGroup>
 
 </Project>

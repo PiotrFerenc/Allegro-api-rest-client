@@ -3,8 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
 using AllegroApi.Domain.AllegroDeliveryMethods;
+using AllegroApi.Domain.AllegroImpliedWarranties;
+using AllegroApi.Domain.AllegroReturnPolicies;
 using AllegroApi.Domain.AllegroShippingRates;
-using AllegroApi.Domain.ImpliedWarranties;
 using AllegroApi.Extensions;
 using AllegroApi.Repository;
 
@@ -60,6 +61,25 @@ namespace AllegroApi.Service.Sale
             var uri = new Uri("https://api.allegro.pl/after-sales-service-conditions/implied-warranties").AddParameter("seller.id", sellerId);
                 
             var result = await _apiRepository.SendQuery<AllegroImpliedWarranties>(new RequestQuery()
+            {
+                Uri = uri,
+                Authorization = authorization,
+                Method = "GET" 
+            });
+
+            if (result.IsFailed)
+            {
+                throw new Exception(string.Join(", ", result.Errors.Select(x => x.Message)));
+            }
+
+            return result.Value;
+        }
+
+        public async Task<ReturnPolicies> GetReturnPoliciesAsync(string authorization, string sellerId)
+        {
+            var uri = new Uri("https://api.allegro.pl/after-sales-service-conditions/return-policies").AddParameter("seller.id", sellerId);
+                
+            var result = await _apiRepository.SendQuery<ReturnPolicies>(new RequestQuery()
             {
                 Uri = uri,
                 Authorization = authorization,

@@ -1,4 +1,4 @@
-    namespace AllegroApi.Domain.ImpliedWarranties
+    namespace AllegroApi.Domain.AllegroImpliedWarranties
     {
         public class ImpliedWarranty
         {

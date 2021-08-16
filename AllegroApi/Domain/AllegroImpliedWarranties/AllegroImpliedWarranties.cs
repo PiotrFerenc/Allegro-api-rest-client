@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AllegroApi.Domain.ImpliedWarranties
+namespace AllegroApi.Domain.AllegroImpliedWarranties
 {
     public class AllegroImpliedWarranties
     {

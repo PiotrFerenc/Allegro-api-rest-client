@@ -1,4 +1,4 @@
-﻿using AllegroApi.Domain.ImpliedWarranties;
+﻿using AllegroApi.Domain.AllegroImpliedWarranties;
 using MediatR;
 
 namespace AllegroApi.Query.Sale
