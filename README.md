@@ -147,4 +147,17 @@ var result = await allegroApi.Query(new UpdateOfferCommand()
 });
 ```
 
+**Publikowanie ofert**
+
+```c#
+var result = await allegroApi.Query(new PublishOffersCommand()
+{
+    Authorization = auth,
+    Offers = new List<OfferId>()
+    {
+        new OfferId("11124109817")
+    }
+});
+```
+
 PS: NIE MA NAPISANYCH TESTÓW
