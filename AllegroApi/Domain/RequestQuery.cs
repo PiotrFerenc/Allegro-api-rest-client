@@ -7,6 +7,6 @@ namespace AllegroApi.Domain
     {
         public Uri Uri { get; set; }
         public string Authorization { get; set; }
-        public string Method { get; set; }
+        public Method Method { get; set; }
     }
 }

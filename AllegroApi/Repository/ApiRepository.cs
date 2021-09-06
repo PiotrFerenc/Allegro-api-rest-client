@@ -21,7 +21,7 @@ namespace AllegroApi.Repository
             try
             {
                 var client = new RestClient(query.Uri) {Timeout = -1};
-                var request = Request(query, Method.GET);
+                var request = Request(query, query.Method);
 
                 var response = await client.ExecuteAsync(request);
 
@@ -45,7 +45,7 @@ namespace AllegroApi.Repository
             try
             {
                 var client = new RestClient(query.Uri) {Timeout = -1};
-                var request = Request(query, Method.POST);
+                var request = Request(query, query.Method);
 
                 var json = JsonConvert.SerializeObject(query.Data, new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()});
                 request.AddParameter("application/vnd.allegro.public.v1+json", json, ParameterType.RequestBody);

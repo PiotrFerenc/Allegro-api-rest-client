@@ -6,7 +6,6 @@ using AllegroApi.Domain.AllegroDeliveryMethods;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.Sale;
 using AllegroApi.Service.Interfaces;
-using AllegroApi.Service.Sale;
 using MediatR;
 
 namespace AllegroApi.Handler.Sale

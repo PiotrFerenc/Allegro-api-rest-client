@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
 using AllegroApi.Domain.AllegroOffer;
-using AllegroApi.Domain.AllegroOffer.Description;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.AllegroOffer.Image;
 using AllegroApi.Domain.AllegroOffer.Result;
@@ -14,8 +13,9 @@ using AllegroApi.Extensions;
 using AllegroApi.Query.AllegroOffer;
 using AllegroApi.Repository;
 using AllegroApi.Service.Interfaces;
+using RestSharp;
 
-namespace AllegroApi.Service.AllegroOffer
+namespace AllegroApi.Service
 {
     public class OfferService : IOfferService
     {
@@ -32,7 +32,7 @@ namespace AllegroApi.Service.AllegroOffer
             {
                 Uri = new Uri($"https://api.allegro.pl/sale/offers/{offerId}"),
                 Authorization = authorization,
-                Method = "GET"
+                Method = Method.GET
             });
 
             return result;
@@ -62,7 +62,7 @@ namespace AllegroApi.Service.AllegroOffer
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = "GET"
+                Method = Method.GET
             });
 
             return result;
@@ -79,7 +79,7 @@ namespace AllegroApi.Service.AllegroOffer
             {
                 Uri = url,
                 Authorization = authorization,
-                Method = "POST"
+                Method = Method.POST
             });
 
 
@@ -104,7 +104,7 @@ namespace AllegroApi.Service.AllegroOffer
                     {
                         Uri = url,
                         Authorization = authorization,
-                        Method = "GET"
+                        Method = Method.GET
                     });
 
 
@@ -141,7 +141,7 @@ namespace AllegroApi.Service.AllegroOffer
                 {
                     Uri = new Uri("https://upload.allegro.pl/sale/images"),
                     Authorization = authorization,
-                    Method = "POST",
+                    Method = Method.POST,
                     Data = new
                     {
                         url = image
@@ -159,11 +159,22 @@ namespace AllegroApi.Service.AllegroOffer
             {
                 Uri = new Uri($"https://api.allegro.pl/sale/offers"),
                 Authorization = authorization,
-                Method = "POST",
+                Method = Method.POST,
                 Data = offer
             });
 
             return result;
+        }
+
+        public async Task UpdateOffer(string authorization, Offer newOffer)
+        {
+            await _apiRepository.SendCommand<object>(new RequestCommand()
+            {
+                Uri = new Uri($"https://api.allegro.pl/sale/offers/" + newOffer.Id),
+                Authorization = authorization,
+                Method = Method.PUT,
+                Data = newOffer
+            });
         }
     }
 }
