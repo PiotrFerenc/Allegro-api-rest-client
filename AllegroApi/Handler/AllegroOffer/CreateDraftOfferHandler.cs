@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Command.AllegroOffer;
-using AllegroApi.Service.AllegroOffer;
 using AllegroApi.Service.Interfaces;
 using MediatR;
 

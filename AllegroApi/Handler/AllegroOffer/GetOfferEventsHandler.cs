@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.AllegroOffer;
-using AllegroApi.Service.AllegroOffer;
 using AllegroApi.Service.Interfaces;
 using MediatR;
 

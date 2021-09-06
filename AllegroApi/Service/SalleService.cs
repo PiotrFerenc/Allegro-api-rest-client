@@ -11,7 +11,7 @@ using AllegroApi.Repository;
 using AllegroApi.Service.Interfaces;
 using RestSharp;
 
-namespace AllegroApi.Service.Sale
+namespace AllegroApi.Service
 {
     public class SaleService : ISaleService
     {
@@ -28,7 +28,7 @@ namespace AllegroApi.Service.Sale
             {
                 Uri = new Uri("https://api.allegro.pl/sale/delivery-methods"),
                 Authorization = authorization,
-                Method = "POST"
+                Method = Method.POST
             });
 
             return result;
@@ -42,7 +42,7 @@ namespace AllegroApi.Service.Sale
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = "POST"
+                Method = Method.POST
             });
 
             return result;
@@ -56,7 +56,7 @@ namespace AllegroApi.Service.Sale
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = "POST"
+                Method = Method.POST
             });
 
             return result;
@@ -70,7 +70,7 @@ namespace AllegroApi.Service.Sale
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = "POST"
+                Method = Method.POST
             });
 
             return result;
@@ -84,7 +84,7 @@ namespace AllegroApi.Service.Sale
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = "POST"
+                Method = Method.POST
             });
 
             return result;

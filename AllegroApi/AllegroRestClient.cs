@@ -1,8 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AllegroApi.Repository;
-using AllegroApi.Service.AllegroOffer;
 using AllegroApi.Service.Interfaces;
-using AllegroApi.Service.Sale;
 using Autofac;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
