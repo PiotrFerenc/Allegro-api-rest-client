@@ -15,9 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="AllegroApi">
-        <HintPath>..\AllegroApi\bin\Release\net5.0\AllegroApi.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\AllegroApi\AllegroApi.csproj" />
     </ItemGroup>
 
 </Project>

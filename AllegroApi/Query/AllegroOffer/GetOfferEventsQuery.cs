@@ -6,7 +6,7 @@ namespace AllegroApi.Query.AllegroOffer
     /// <summary>
     /// Dziennik zdarzeń w ofertach sprzedawcy
     /// </summary>
-    public class GetOfferEventsQuery : AuthorizationToken, IRequest<OfferEvents>
+    public class OfferEventsQuery : AuthorizationToken, IRequest<OfferEvents>
     {
         /// <summary>
         /// from - podaj id eventu, by uzyskać wszystkie eventy które nastąpiły później 
@@ -21,19 +21,19 @@ namespace AllegroApi.Query.AllegroOffer
         /// <summary>
         /// type - podaj typ eventów, które chcesz uzyskać w odpowiedzi
         /// </summary>
-        public OfferEventType Type { get; set; } = OfferEventType.NONE;
+        public OfferEventType Type { get; set; } = OfferEventType.None;
 
         public enum OfferEventType
         {
-            OFFER_ACTIVATED,
-            OFFER_CHANGED,
-            OFFER_STOCK_CHANGED,
-            OFFER_PRICE_CHANGED,
-            OFFER_ENDED,
-            OFFER_ARCHIVED,
-            OFFER_BID_PLACED,
-            OFFER_BID_CANCELED,
-            NONE
+            OfferActivated,
+            OfferChanged,
+            OfferStockChanged,
+            OfferPriceChanged,
+            OfferEnded,
+            OfferArchived,
+            OfferBidPlaced,
+            OfferBidCanceled,
+            None
         }
     }
 }

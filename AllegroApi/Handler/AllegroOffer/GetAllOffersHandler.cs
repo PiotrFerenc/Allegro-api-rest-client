@@ -7,23 +7,24 @@ using AllegroApi.Domain.AllegroOffer;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.AllegroOffer;
 using AllegroApi.Service.AllegroOffer;
+using AllegroApi.Service.Interfaces;
 using MediatR;
 
 namespace AllegroApi.Handler.AllegroOffer
 {
-    public class GetAllOffersHandler : IRequestHandler<GetAllOffersQuery, List<Offer>>
+    public class AllOffersHandler : IRequestHandler<AllOffersQuery, List<Offer>>
     {
         private readonly IOfferService _offerService;
 
-        public GetAllOffersHandler(IOfferService offerService)
+        public AllOffersHandler(IOfferService offerService)
         {
             _offerService = offerService;
         }
 
-        public async Task<List<Offer>> Handle(GetAllOffersQuery request, CancellationToken
+        public async Task<List<Offer>> Handle(AllOffersQuery request, CancellationToken
             cancellationToken)
         {
-            var validator = new GetAllOffersQueryValidator();
+            var validator = new AllOffersQueryValidator();
             var validatorResult = await validator.ValidateAsync(request, cancellationToken);
 
             if (!validatorResult.IsValid)

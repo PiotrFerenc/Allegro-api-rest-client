@@ -3,18 +3,18 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class GetOfferEventsQueryValidator : AbstractValidator<GetOfferEventsQuery>
+    public class OfferEventsQueryValidator : AbstractValidator<OfferEventsQuery>
     {
-        public GetOfferEventsQueryValidator()
+        public OfferEventsQueryValidator()
         {
             RuleFor(x => x.Authorization).NotEmpty();
 
             RuleFor(x => x).Must(HasOneFieldNotEmpty).WithMessage("Jedno z pól musi być wypełnione.");
         }
 
-        private bool HasOneFieldNotEmpty(GetOfferEventsQuery arg)
+        private bool HasOneFieldNotEmpty(OfferEventsQuery arg)
         {
-            var result = !string.IsNullOrEmpty(arg.From) || arg.Limit > 0 || arg.Type != GetOfferEventsQuery.OfferEventType.NONE;
+            var result = !string.IsNullOrEmpty(arg.From) || arg.Limit > 0 || arg.Type != OfferEventsQuery.OfferEventType.None;
             return result;
         }
     }

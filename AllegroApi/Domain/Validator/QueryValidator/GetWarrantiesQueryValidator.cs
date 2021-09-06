@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class GetWarrantiesQueryValidator: AbstractValidator<GetWarrantiesQuery>
+    public class WarrantiesQueryValidator: AbstractValidator<WarrantiesQuery>
     {
-        public GetWarrantiesQueryValidator()
+        public WarrantiesQueryValidator()
         {
             RuleFor(x => x.Authorization).NotEmpty();
             RuleFor(x => x.SellerId).NotEmpty();

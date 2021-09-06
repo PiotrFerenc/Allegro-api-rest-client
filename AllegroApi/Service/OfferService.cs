@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
+using AllegroApi.Domain.AllegroOffer;
+using AllegroApi.Domain.AllegroOffer.Description;
 using AllegroApi.Domain.AllegroOffer.Event;
+using AllegroApi.Domain.AllegroOffer.Image;
 using AllegroApi.Domain.AllegroOffer.Result;
 using AllegroApi.Extensions;
 using AllegroApi.Query.AllegroOffer;
 using AllegroApi.Repository;
+using AllegroApi.Service.Interfaces;
 
 namespace AllegroApi.Service.AllegroOffer
 {
@@ -20,24 +25,19 @@ namespace AllegroApi.Service.AllegroOffer
             _apiRepository = apiRepository;
         }
 
-        public async Task<Domain.AllegroOffer.Offer> GetOfferByIdAsync(string authorization, string offerId)
+        public async Task<Offer> GetOfferByIdAsync(string authorization, string offerId)
         {
-            var result = await _apiRepository.SendQuery<Domain.AllegroOffer.Offer>(new RequestQuery()
+            var result = await _apiRepository.SendQuery<Offer>(new RequestQuery()
             {
                 Uri = new Uri($"https://api.allegro.pl/sale/offers/{offerId}"),
                 Authorization = authorization,
                 Method = "GET"
             });
 
-            if (result.IsFailed)
-            {
-                throw new Exception(string.Join(", ", result.Errors.Select(x => x.Message)));
-            }
-
-            return result.Value;
+            return result;
         }
 
-        public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit, GetOfferEventsQuery.OfferEventType type)
+        public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit, OfferEventsQuery.OfferEventType type)
         {
             var uri = new Uri($"https://api.allegro.pl/sale/offer-events");
 
@@ -51,7 +51,7 @@ namespace AllegroApi.Service.AllegroOffer
                 uri = uri.AddParameter("limit", limit.ToString());
             }
 
-            if (type != GetOfferEventsQuery.OfferEventType.NONE)
+            if (type != OfferEventsQuery.OfferEventType.None)
             {
                 uri = uri.AddParameter("type", type.ToString());
             }
@@ -64,15 +64,10 @@ namespace AllegroApi.Service.AllegroOffer
                 Method = "GET"
             });
 
-            if (result.IsFailed)
-            {
-                throw new Exception(string.Join(", ", result.Errors.Select(x => x.Message)));
-            }
-
-            return result.Value;
+            return result;
         }
 
-        public async Task<List<Domain.AllegroOffer.Offer>> GetOffersAsync(string authorization, PublicationStatus publicationStatus)
+        public async Task<List<Offer>> GetOffersAsync(string authorization, PublicationStatus publicationStatus)
         {
             var offersStatus = publicationStatus.ToString().ToUpper();
             var url = new Uri($"https://api.allegro.pl/sale/offers");
@@ -83,15 +78,11 @@ namespace AllegroApi.Service.AllegroOffer
             {
                 Uri = url,
                 Authorization = authorization,
-                Method = "GET"
+                Method = "POST"
             });
-            
-            if (firstOfferPage.IsFailed)
-            {
-                throw new Exception(string.Join(", ",firstOfferPage.Errors.Select(x => x.Message)));
-            }
-            
-            var offers = firstOfferPage.Value;
+
+
+            var offers = firstOfferPage;
             var result = offers.Offers;
 
             if (offers.TotalCount >= 1000)
@@ -116,7 +107,7 @@ namespace AllegroApi.Service.AllegroOffer
                     });
 
 
-                    var pageWithOffers = offerPage.ValueOrDefault;
+                    var pageWithOffers = offerPage;
                     if (pageWithOffers != null)
                     {
                         result.AddRange(pageWithOffers.Offers);
@@ -127,14 +118,41 @@ namespace AllegroApi.Service.AllegroOffer
                 }
             }
 
-            if (firstOfferPage.IsFailed)
-            {
-                throw new Exception(string.Join(", ", firstOfferPage.Errors.Select(x => x.Message)));
-            }
-
             return result;
         }
 
-      
+        public async Task<Offer> CreateOffer(string authorization, NewOffer offer)
+        {
+            var options = RegexOptions.None;
+            var regex = new Regex("[ ]{2,}", options);
+            foreach (var s in offer.Description.Sections.SelectMany(section => section.Items))
+            {
+                s.Content = regex.Replace(s.Content, " ");
+            }
+            
+            // var imgs = offer.Images.Select(x => x.Url);
+            //
+            //
+            // offer.Images = new List<Image>();
+            //
+            // foreach (var image in imgs)
+            // {
+            //     offer.images.Add(new Image()
+            //     {
+            //         Url = _allegroOffer.UploadImage(new Uri(image)).location
+            //     });
+            // }
+
+          
+            var result = await _apiRepository.SendCommand<Offer>(new RequestCommand()
+            {
+                Uri = new Uri($"https://api.allegro.pl/sale/offers"),
+                Authorization = authorization,
+                Method = "POST",
+                Data = offer
+            });
+
+            return result;
+        }
     }
 }

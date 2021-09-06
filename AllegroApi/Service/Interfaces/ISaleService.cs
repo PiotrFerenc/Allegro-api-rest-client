@@ -4,7 +4,7 @@ using AllegroApi.Domain.AllegroReturnPolicies;
 using AllegroApi.Domain.AllegroShippingRates;
 using AllegroApi.Domain.AllegroWarranties;
 
-namespace AllegroApi.Service.Sale
+namespace AllegroApi.Service.Interfaces
 {
     public interface ISaleService
     {

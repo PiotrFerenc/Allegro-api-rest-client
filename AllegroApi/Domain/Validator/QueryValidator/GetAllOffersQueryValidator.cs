@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class GetAllOffersQueryValidator: AbstractValidator<GetAllOffersQuery>
+    public class AllOffersQueryValidator: AbstractValidator<AllOffersQuery>
     {
-        public GetAllOffersQueryValidator()
+        public AllOffersQueryValidator()
         {
             RuleFor(x => x.Authorization).NotEmpty();
         }

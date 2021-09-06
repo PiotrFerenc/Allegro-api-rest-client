@@ -3,7 +3,7 @@ using MediatR;
 
 namespace AllegroApi.Query.Sale
 {
-    public class GetDeliveryMethodsQuery : AuthorizationToken , IRequest<ListOfDeliveryMethods>
+    public class DeliveryMethodsQuery : AuthorizationToken , IRequest<ListOfDeliveryMethods>
     {
     }
 }

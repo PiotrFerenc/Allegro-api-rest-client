@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using AllegroApi.Domain;
-using FluentResults;
 
 namespace AllegroApi.Repository
 {
     public interface IApiRepository 
     {
-        Task<Result<T>> SendQuery<T>(RequestQuery query);
+        Task<T> SendQuery<T>(RequestQuery query);
+        Task<T> SendCommand<T>(RequestCommand query);
     }
 }

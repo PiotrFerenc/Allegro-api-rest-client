@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroShippingRates;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.Sale;
+using AllegroApi.Service.Interfaces;
 using AllegroApi.Service.Sale;
 using MediatR;
 
 namespace AllegroApi.Handler.Sale
 {
     
-    public class ShippingRatesHandler: IRequestHandler<GetSellerShippingRatesQuery, ShippingRates>
+    public class ShippingRatesHandler: IRequestHandler<SellerShippingRatesQuery, ShippingRates>
     {
         private readonly ISaleService _sellerService;
 
@@ -20,9 +21,9 @@ namespace AllegroApi.Handler.Sale
             _sellerService = sellerService;
         }
 
-        public async Task<ShippingRates> Handle(GetSellerShippingRatesQuery request, CancellationToken cancellationToken)
+        public async Task<ShippingRates> Handle(SellerShippingRatesQuery request, CancellationToken cancellationToken)
         {
-            var validator = new GetSellerShippingRatesQueryValidator();
+            var validator = new SellerShippingRatesQueryValidator();
             var validatorResult = await validator.ValidateAsync(request, cancellationToken);
 
             if (!validatorResult.IsValid)

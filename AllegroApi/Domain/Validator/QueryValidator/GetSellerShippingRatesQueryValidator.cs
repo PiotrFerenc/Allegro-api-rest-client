@@ -5,9 +5,9 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class GetSellerShippingRatesQueryValidator: AbstractValidator<GetSellerShippingRatesQuery>
+    public class SellerShippingRatesQueryValidator: AbstractValidator<SellerShippingRatesQuery>
     {
-        public GetSellerShippingRatesQueryValidator()
+        public SellerShippingRatesQueryValidator()
         {
             RuleFor(x => x.Authorization).NotEmpty();
             RuleFor(x => x.SellerId).NotEmpty();

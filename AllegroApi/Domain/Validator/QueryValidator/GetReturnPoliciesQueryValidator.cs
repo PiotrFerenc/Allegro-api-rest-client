@@ -5,9 +5,9 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class GetReturnPoliciesQueryValidator: AbstractValidator<GetReturnPoliciesQuery>
+    public class ReturnPoliciesQueryValidator: AbstractValidator<ReturnPoliciesQuery>
     {
-        public GetReturnPoliciesQueryValidator()
+        public ReturnPoliciesQueryValidator()
         {
             RuleFor(x => x.Authorization).NotEmpty();
             RuleFor(x => x.SellerId).NotEmpty();
