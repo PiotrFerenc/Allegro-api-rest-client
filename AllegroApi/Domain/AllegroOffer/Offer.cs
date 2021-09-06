@@ -42,8 +42,13 @@ namespace AllegroApi.Domain.AllegroOffer
         public DateTime UpdatedAt { get; set; }
     }
 
-    public   class OfferId
+    public class OfferId
     {
+        public OfferId(string id)
+        {
+            Id = id;
+        }
+
         public string Id { get; set; }
     }
 }

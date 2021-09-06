@@ -7,6 +7,7 @@ using AllegroApi.Domain;
 using AllegroApi.Domain.AllegroOffer;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.AllegroOffer.Image;
+using AllegroApi.Domain.AllegroOffer.Publication;
 using AllegroApi.Domain.AllegroOffer.Result;
 using AllegroApi.Domain.AllegroOffer.Upload;
 using AllegroApi.Extensions;
@@ -175,6 +176,19 @@ namespace AllegroApi.Service
                 Method = Method.PUT,
                 Data = newOffer
             });
+        }
+
+        public async Task<CommandTask> PublishOffers(string authorization, PublishOffer offers)
+        {
+            var result = await _apiRepository.SendCommand<CommandTask>(new RequestCommand()
+            {
+                Uri = new Uri($"https://api.allegro.pl/sale/offer-publication-commands/" + Guid.NewGuid().ToString()),
+                Authorization = authorization,
+                Method = Method.PUT,
+                Data = offers
+            });
+
+            return result;
         }
     }
 }
