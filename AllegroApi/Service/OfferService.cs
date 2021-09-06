@@ -9,6 +9,7 @@ using AllegroApi.Domain.AllegroOffer.Description;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.AllegroOffer.Image;
 using AllegroApi.Domain.AllegroOffer.Result;
+using AllegroApi.Domain.AllegroOffer.Upload;
 using AllegroApi.Extensions;
 using AllegroApi.Query.AllegroOffer;
 using AllegroApi.Repository;
@@ -129,21 +130,31 @@ namespace AllegroApi.Service.AllegroOffer
             {
                 s.Content = regex.Replace(s.Content, " ");
             }
-            
-            // var imgs = offer.Images.Select(x => x.Url);
-            //
-            //
-            // offer.Images = new List<Image>();
-            //
-            // foreach (var image in imgs)
-            // {
-            //     offer.images.Add(new Image()
-            //     {
-            //         Url = _allegroOffer.UploadImage(new Uri(image)).location
-            //     });
-            // }
 
-          
+            var offerImages = offer.Images.Select(x => x.Url);
+
+            offer.Images = new List<Image>();
+
+            foreach (var image in offerImages)
+            {
+                var uploadImage = await _apiRepository.SendCommand<UploadImageResult>(new RequestCommand()
+                {
+                    Uri = new Uri("https://upload.allegro.pl/sale/images"),
+                    Authorization = authorization,
+                    Method = "POST",
+                    Data = new
+                    {
+                        url = image
+                    }
+                });
+
+                offer.Images.Add(new Image()
+                {
+                    Url = uploadImage.location
+                });
+            }
+
+
             var result = await _apiRepository.SendCommand<Offer>(new RequestCommand()
             {
                 Uri = new Uri($"https://api.allegro.pl/sale/offers"),

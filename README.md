@@ -2,12 +2,11 @@
 
 Połączenie:
 
-- FluentResults
 - FluentValidation
 - MediatR
 - Autofac
 
-Authorization => token do Bearer
+###### Authorization => token do Bearer
 
 ```C#
 var allegroApi = new AllegroRestClient();
@@ -15,7 +14,8 @@ var allegroApi = new AllegroRestClient();
 
 --------------------------------------------------------------------------
 
-Pobieranie szczegółów oferty:
+###### **Pobieranie szczegółów oferty:**
+
 https://developer.allegro.pl/documentation/#operation/getOfferUsingGET
 
 ```C#
@@ -28,8 +28,7 @@ var result = await allegroApi.Query(new GetOfferByIdQuery()
 
 --------------------------------------------------------------------------
 
-Dziennik zdarzeń w ofertach sprzedawcy:
-
+###### Dziennik zdarzeń w ofertach sprzedawcy:
 
 https://developer.allegro.pl/documentation/#operation/getOfferEvents
 
@@ -45,7 +44,7 @@ var result = await allegroApi.Query(new GetOfferEventsQuery()
 
 --------------------------------------------------------------------------
 
-Jak pobrać moje oferty w REST API
+**Jak pobrać moje oferty w REST API**
 
 https://developer.allegro.pl/documentation/#operation/searchOffersUsingGET
 
@@ -59,7 +58,7 @@ var result = await allegroApi.Query(new GetAllOffersQuery()
 
 ------------------------------------------
 
-Pobieranie metod dostawy
+**Pobieranie metod dostawy**
 
 https://developer.allegro.pl/documentation/#operation/getListOfDeliveryMethodsUsingGET
 ```C#
@@ -69,7 +68,7 @@ var result = await allegroApi.Query(new GetDeliveryMethodsQuery()
 });
 ```
 
-Pobieranie cenników dostaw
+**Pobieranie cenników dostaw**
 
 https://developer.allegro.pl/news/2018-08-14-cenniki_dostawy/#list
 
@@ -81,7 +80,7 @@ var result = await allegroApi.Query(new GetSellerShippingRatesQuery()
  });
 ```
 
-Warunki reklamacji
+**Warunki reklamacji**
 
 ```c#
 var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
@@ -91,7 +90,7 @@ var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
 });
 ```
 
-Warunki zwrotów
+**Warunki zwrotów**
 
 ```c#
 var result = await allegroApi.Query(new GetReturnPoliciesQuery()
@@ -101,7 +100,7 @@ var result = await allegroApi.Query(new GetReturnPoliciesQuery()
 });
 ```
 
-Informacje o gwarancji
+**Informacje o gwarancji**
 
 ```c#
 var result = await allegroApi.Query(new GetWarrantiesQuery()
@@ -110,6 +109,25 @@ var result = await allegroApi.Query(new GetWarrantiesQuery()
     SellerId = "123456"
 });
 ```
+**Wystawianie ofert**
+```c#
+var auth = "auth-code";
+                
+var offer = await allegroApi.Query(new OfferByIdQuery()
+{
+    Authorization = auth,
+    OfferId = "1234567890"
+});
 
+Console.WriteLine(offer.Name);
+                
+var result = await allegroApi.Query(new CreateDraftOfferCommand()
+{
+    Authorization = auth,
+    Offer = new NewOffer(offer)
+});
+
+Console.WriteLine(result); //<-- draft id
+```
 
 PS: NIE MA NAPISANYCH TESTÓW

@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
+using AllegroApi.Domain.AllegroOffer.Upload;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
@@ -64,6 +65,11 @@ namespace AllegroApi.Repository
             {
                 throw new WebException(e.Message);
             }
+        }
+
+        public Task<UploadImageResult> UploadImage(Uri uri)
+        {
+            throw new NotImplementedException();
         }
 
         private static RestRequest Request(IRequestAllegro query, Method method)
