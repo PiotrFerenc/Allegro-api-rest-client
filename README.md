@@ -130,4 +130,21 @@ var result = await allegroApi.Query(new CreateDraftOfferCommand()
 Console.WriteLine(result); //<-- draft id
 ```
 
+**Aktualizacja oferty**
+```c#
+var auth = "auth-code";
+
+var offer = await allegroApi.Query(new OfferByIdQuery()
+{
+    Authorization = auth,
+    OfferId = "1234567890"
+});
+
+var result = await allegroApi.Query(new UpdateOfferCommand()
+{
+    Authorization = auth,
+    Offer = offer
+});
+```
+
 PS: NIE MA NAPISANYCH TESTÓW
