@@ -11,7 +11,7 @@ using MediatR;
 namespace AllegroApi.Handler.Sale
 {
     
-    public class ShippingRatesHandler: IRequestHandler<SellerShippingRatesQuery, ShippingRates>
+    public class ShippingRatesHandler: IRequestHandler<GetSellerShippingRatesQuery, ShippingRates>
     {
         private readonly ISaleService _sellerService;
 
@@ -20,7 +20,7 @@ namespace AllegroApi.Handler.Sale
             _sellerService = sellerService;
         }
 
-        public async Task<ShippingRates> Handle(SellerShippingRatesQuery request, CancellationToken cancellationToken)
+        public async Task<ShippingRates> Handle(GetSellerShippingRatesQuery request, CancellationToken cancellationToken)
         {
             var validator = new SellerShippingRatesQueryValidator();
             var validatorResult = await validator.ValidateAsync(request, cancellationToken);

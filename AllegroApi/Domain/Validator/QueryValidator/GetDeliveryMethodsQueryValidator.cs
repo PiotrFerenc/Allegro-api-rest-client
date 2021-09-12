@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class DeliveryMethodsQueryValidator: AbstractValidator<DeliveryMethodsQuery>
+    public class DeliveryMethodsQueryValidator: AbstractValidator<GetDeliveryMethodsQuery>
     {
         public DeliveryMethodsQueryValidator()
         {

@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class ImpliedWarrantiesQueryValidator: AbstractValidator<ImpliedWarrantiesQuery>
+    public class ImpliedWarrantiesQueryValidator: AbstractValidator<GetImpliedWarrantiesQuery>
     {
         public ImpliedWarrantiesQueryValidator()
         {

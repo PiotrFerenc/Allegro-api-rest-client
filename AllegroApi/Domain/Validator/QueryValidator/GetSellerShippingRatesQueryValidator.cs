@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class SellerShippingRatesQueryValidator: AbstractValidator<SellerShippingRatesQuery>
+    public class SellerShippingRatesQueryValidator: AbstractValidator<GetSellerShippingRatesQuery>
     {
         public SellerShippingRatesQueryValidator()
         {

@@ -11,7 +11,7 @@ using MediatR;
 namespace AllegroApi.Handler.Sale
 {
     
-    public class DeliveryMethodsHandler: IRequestHandler<DeliveryMethodsQuery, ListOfDeliveryMethods>
+    public class DeliveryMethodsHandler: IRequestHandler<GetDeliveryMethodsQuery, ListOfDeliveryMethods>
     {
         private readonly ISaleService _sellerService;
 
@@ -21,7 +21,7 @@ namespace AllegroApi.Handler.Sale
         }
 
 
-        public async Task<ListOfDeliveryMethods> Handle(DeliveryMethodsQuery request, CancellationToken 
+        public async Task<ListOfDeliveryMethods> Handle(GetDeliveryMethodsQuery request, CancellationToken 
         cancellationToken)
         {
             var validator = new DeliveryMethodsQueryValidator();

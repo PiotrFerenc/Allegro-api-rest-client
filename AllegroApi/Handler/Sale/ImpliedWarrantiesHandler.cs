@@ -12,7 +12,7 @@ using MediatR;
 namespace AllegroApi.Handler.Sale
 {
     
-    public class ImpliedWarrantiesHandler: IRequestHandler<ImpliedWarrantiesQuery, AllegroImpliedWarranties>
+    public class ImpliedWarrantiesHandler: IRequestHandler<GetImpliedWarrantiesQuery, AllegroImpliedWarranties>
     {
         private readonly ISaleService _sellerService;
 
@@ -21,7 +21,7 @@ namespace AllegroApi.Handler.Sale
             _sellerService = sellerService;
         }
 
-        public async Task<AllegroImpliedWarranties> Handle(ImpliedWarrantiesQuery request, CancellationToken cancellationToken)
+        public async Task<AllegroImpliedWarranties> Handle(GetImpliedWarrantiesQuery request, CancellationToken cancellationToken)
         {
             var validator = new ImpliedWarrantiesQueryValidator();
             var validatorResult = await validator.ValidateAsync(request, cancellationToken);
