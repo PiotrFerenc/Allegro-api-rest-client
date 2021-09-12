@@ -4,7 +4,7 @@ using MediatR;
 
 namespace AllegroApi.Query.AllegroOffer
 {
-    public class AllOffersQuery : AuthorizationToken, IRequest<List<Offer>>
+    public class GetAllOffersQuery : AuthorizationToken, IRequest<List<Offer>>
     {
  
         public PublicationStatus PublicationStatus { get; set; }

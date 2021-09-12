@@ -6,7 +6,7 @@ namespace AllegroApi.Query.AllegroOffer
     /// <summary>
     /// Dziennik zdarzeń w ofertach sprzedawcy
     /// </summary>
-    public class OfferEventsQuery : AuthorizationToken, IRequest<OfferEvents>
+    public class GetOfferEventsQuery : AuthorizationToken, IRequest<OfferEvents>
     {
         /// <summary>
         /// from - podaj id eventu, by uzyskać wszystkie eventy które nastąpiły później 

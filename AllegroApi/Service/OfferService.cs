@@ -39,7 +39,7 @@ namespace AllegroApi.Service
             return result;
         }
 
-        public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit, OfferEventsQuery.OfferEventType type)
+        public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit, GetOfferEventsQuery.OfferEventType type)
         {
             var uri = new Uri($"https://api.allegro.pl/sale/offer-events");
 
@@ -53,7 +53,7 @@ namespace AllegroApi.Service
                 uri = uri.AddParameter("limit", limit.ToString());
             }
 
-            if (type != OfferEventsQuery.OfferEventType.None)
+            if (type != GetOfferEventsQuery.OfferEventType.None)
             {
                 uri = uri.AddParameter("type", type.ToString());
             }

@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class AllOffersQueryValidator: AbstractValidator<AllOffersQuery>
+    public class AllOffersQueryValidator: AbstractValidator<GetAllOffersQuery>
     {
         public AllOffersQueryValidator()
         {
