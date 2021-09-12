@@ -42,7 +42,7 @@ namespace AllegroApi.Service
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = Method.POST
+                Method = Method.GET
             });
 
             return result;
@@ -56,7 +56,7 @@ namespace AllegroApi.Service
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = Method.POST
+                Method = Method.GET
             });
 
             return result;
@@ -70,7 +70,7 @@ namespace AllegroApi.Service
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = Method.POST
+                Method = Method.GET
             });
 
             return result;
@@ -84,7 +84,7 @@ namespace AllegroApi.Service
             {
                 Uri = uri,
                 Authorization = authorization,
-                Method = Method.POST
+                Method = Method.GET
             });
 
             return result;
