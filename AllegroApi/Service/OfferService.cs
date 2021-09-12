@@ -38,7 +38,6 @@ namespace AllegroApi.Service
 
             return result;
         }
-
         public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit, GetOfferEventsQuery.OfferEventType type)
         {
             var uri = new Uri($"https://api.allegro.pl/sale/offer-events");
@@ -68,7 +67,6 @@ namespace AllegroApi.Service
 
             return result;
         }
-
         public async Task<List<Offer>> GetOffersAsync(string authorization, PublicationStatus publicationStatus)
         {
             var offersStatus = publicationStatus.ToString().ToUpper();
@@ -80,7 +78,7 @@ namespace AllegroApi.Service
             {
                 Uri = url,
                 Authorization = authorization,
-                Method = Method.POST
+                Method = Method.GET
             });
 
 
@@ -122,7 +120,6 @@ namespace AllegroApi.Service
 
             return result;
         }
-
         public async Task<Offer> CreateOffer(string authorization, NewOffer offer)
         {
             var options = RegexOptions.None;
@@ -166,7 +163,6 @@ namespace AllegroApi.Service
 
             return result;
         }
-
         public async Task UpdateOffer(string authorization, Offer newOffer)
         {
             await _apiRepository.SendCommand<object>(new RequestCommand()
@@ -177,7 +173,6 @@ namespace AllegroApi.Service
                 Data = newOffer
             });
         }
-
         public async Task<CommandTask> PublishOffers(string authorization, PublishOffer offers)
         {
             var result = await _apiRepository.SendCommand<CommandTask>(new RequestCommand()
