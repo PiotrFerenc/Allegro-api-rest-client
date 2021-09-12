@@ -28,7 +28,7 @@ namespace AllegroApi.Service
             {
                 Uri = new Uri("https://api.allegro.pl/sale/delivery-methods"),
                 Authorization = authorization,
-                Method = Method.POST
+                Method = Method.GET
             });
 
             return result;
