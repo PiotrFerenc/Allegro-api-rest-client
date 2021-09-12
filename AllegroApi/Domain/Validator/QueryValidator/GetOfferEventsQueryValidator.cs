@@ -14,7 +14,7 @@ namespace AllegroApi.Domain.Validator.QueryValidator
 
         private bool HasOneFieldNotEmpty(GetOfferEventsQuery arg)
         {
-            var result = !string.IsNullOrEmpty(arg.From) || arg.Limit > 0 || arg.Type != GetOfferEventsQuery.OfferEventType.None;
+            var result = !string.IsNullOrEmpty(arg.From) || arg.Limit > 0 || arg.Type != GetOfferEventsQuery.OfferEventType.NONE;
             return result;
         }
     }

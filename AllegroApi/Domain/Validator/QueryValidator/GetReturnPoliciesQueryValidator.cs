@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace AllegroApi.Domain.Validator.QueryValidator
 {
-    public class ReturnPoliciesQueryValidator: AbstractValidator<ReturnPoliciesQuery>
+    public class ReturnPoliciesQueryValidator: AbstractValidator<GetReturnPoliciesQuery>
     {
         public ReturnPoliciesQueryValidator()
         {

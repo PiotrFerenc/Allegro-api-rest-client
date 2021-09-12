@@ -21,19 +21,19 @@ namespace AllegroApi.Query.AllegroOffer
         /// <summary>
         /// type - podaj typ eventów, które chcesz uzyskać w odpowiedzi
         /// </summary>
-        public OfferEventType Type { get; set; } = OfferEventType.None;
+        public OfferEventType Type { get; set; } = OfferEventType.NONE;
 
         public enum OfferEventType
         {
-            OfferActivated,
-            OfferChanged,
-            OfferStockChanged,
-            OfferPriceChanged,
-            OfferEnded,
-            OfferArchived,
-            OfferBidPlaced,
-            OfferBidCanceled,
-            None
+            OFFER_ACTIVATED,
+            OFFER_CHANGED,
+            OFFER_STOCKCHANGED,
+            OFFER_PRICECHANGED,
+            OFFER_ENDED,
+            OFFER_ARCHIVED,
+            OFFER_BIDPLACED,
+            OFFER_BIDCANCELED,
+            NONE
         }
     }
 }

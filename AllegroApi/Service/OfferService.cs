@@ -53,7 +53,7 @@ namespace AllegroApi.Service
                 uri = uri.AddParameter("limit", limit.ToString());
             }
 
-            if (type != GetOfferEventsQuery.OfferEventType.None)
+            if (type != GetOfferEventsQuery.OfferEventType.NONE)
             {
                 uri = uri.AddParameter("type", type.ToString());
             }

@@ -11,7 +11,7 @@ using MediatR;
 namespace AllegroApi.Handler.Sale
 {
     
-    public class ReturnPoliciesHandler: IRequestHandler<ReturnPoliciesQuery, ReturnPolicies>
+    public class ReturnPoliciesHandler: IRequestHandler<GetReturnPoliciesQuery, ReturnPolicies>
     {
         private readonly ISaleService _sellerService;
 
@@ -20,7 +20,7 @@ namespace AllegroApi.Handler.Sale
             _sellerService = sellerService;
         }
 
-        public async Task<ReturnPolicies> Handle(ReturnPoliciesQuery request, CancellationToken cancellationToken)
+        public async Task<ReturnPolicies> Handle(GetReturnPoliciesQuery request, CancellationToken cancellationToken)
         {
             var validator = new ReturnPoliciesQueryValidator();
             var validatorResult = await validator.ValidateAsync(request, cancellationToken);
