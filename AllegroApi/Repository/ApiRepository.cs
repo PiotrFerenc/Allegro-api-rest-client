@@ -13,9 +13,6 @@ namespace AllegroApi.Repository
 {
     public class ApiRepository : IApiRepository
     {
-        public string ContentType = "application/vnd.allegro.public.v1+json";
-        public string Accept = "application/vnd.allegro.public.v1+json";
-
         public async Task<T> SendQuery<T>(RequestQuery query)
         {
             try

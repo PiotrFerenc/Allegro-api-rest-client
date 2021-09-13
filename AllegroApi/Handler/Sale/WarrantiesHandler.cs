@@ -24,7 +24,6 @@ namespace AllegroApi.Handler.Sale
 
         public async Task<Warranties> Handle(GetWarrantiesQuery request, CancellationToken cancellationToken)
         {
-   
             await ValidatorHelper.TryValidate<WarrantiesQueryValidator, GetWarrantiesQuery>(request);
 
             var result = await _sellerService.GetWarrantiesAsync(request.Authorization,request.SellerId);
