@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroOffer;
+using AllegroApi.Domain.Validator;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.AllegroOffer;
 using AllegroApi.Service.Interfaces;
@@ -20,18 +21,11 @@ namespace AllegroApi.Handler.AllegroOffer
             _offerService = offerService;
         }
 
-        public async Task<List<Offer>> Handle(GetAllOffersQuery request, CancellationToken
-            cancellationToken)
+        public async Task<List<Offer>> Handle(GetAllOffersQuery request, CancellationToken cancellationToken)
         {
-            var validator = new AllOffersQueryValidator();
-            var validatorResult = await validator.ValidateAsync(request, cancellationToken);
+            await ValidatorHelper.TryValidate<AllOffersQueryValidator, GetAllOffersQuery>(request);
 
-            if (!validatorResult.IsValid)
-            {
-                throw new Exception(string.Join(", ", validatorResult.Errors.Select(x => x.ErrorMessage)));
-            }
-
-            var result = await _offerService.GetOffersAsync(request.Authorization,request.PublicationStatus);
+            var result = await _offerService.GetOffersAsync(request.Authorization, request.PublicationStatus);
 
             return result;
         }

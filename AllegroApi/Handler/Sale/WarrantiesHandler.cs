@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroShippingRates;
 using AllegroApi.Domain.AllegroWarranties;
+using AllegroApi.Domain.Validator;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.Sale;
 using AllegroApi.Service.Interfaces;
@@ -23,13 +24,8 @@ namespace AllegroApi.Handler.Sale
 
         public async Task<Warranties> Handle(GetWarrantiesQuery request, CancellationToken cancellationToken)
         {
-            var validator = new WarrantiesQueryValidator();
-            var validatorResult = await validator.ValidateAsync(request, cancellationToken);
-
-            if (!validatorResult.IsValid)
-            {
-                throw new Exception(string.Join(", ", validatorResult.Errors.Select(x => x.ErrorMessage)));
-            }
+   
+            await ValidatorHelper.TryValidate<WarrantiesQueryValidator, GetWarrantiesQuery>(request);
 
             var result = await _sellerService.GetWarrantiesAsync(request.Authorization,request.SellerId);
 

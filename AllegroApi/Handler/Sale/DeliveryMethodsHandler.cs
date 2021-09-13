@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroDeliveryMethods;
+using AllegroApi.Domain.Validator;
 using AllegroApi.Domain.Validator.QueryValidator;
 using AllegroApi.Query.Sale;
 using AllegroApi.Service.Interfaces;
@@ -24,13 +25,7 @@ namespace AllegroApi.Handler.Sale
         public async Task<ListOfDeliveryMethods> Handle(GetDeliveryMethodsQuery request, CancellationToken 
         cancellationToken)
         {
-            var validator = new DeliveryMethodsQueryValidator();
-            var validatorResult = await validator.ValidateAsync(request, cancellationToken);
-
-            if (!validatorResult.IsValid)
-            {
-                throw new Exception(string.Join(", ", validatorResult.Errors.Select(x => x.ErrorMessage)));
-            }
+            await ValidatorHelper.TryValidate<DeliveryMethodsQueryValidator, GetDeliveryMethodsQuery>(request);
 
             var result = await _sellerService.GetDeliveryMethodsAsync(request.Authorization);
 

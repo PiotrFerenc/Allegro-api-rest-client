@@ -25,9 +25,9 @@ namespace AllegroApi.Repository
 
                 var response = await client.ExecuteAsync(request);
 
-                var deserializeObject = JsonConvert.DeserializeObject<T>(response.Content);
+                var result = ValidateResponse<T>(response);
 
-                return deserializeObject;
+                return result;
                 //TODO: Logging ex
             }
             catch (WebException we)
@@ -39,7 +39,6 @@ namespace AllegroApi.Repository
                 throw new WebException(e.Message);
             }
         }
-
         public async Task<T> SendCommand<T>(RequestCommand query)
         {
             try
@@ -50,11 +49,12 @@ namespace AllegroApi.Repository
                 var json = JsonConvert.SerializeObject(query.Data, new JsonSerializerSettings {ContractResolver = new CamelCasePropertyNamesContractResolver()});
                 request.AddParameter("application/vnd.allegro.public.v1+json", json, ParameterType.RequestBody);
 
-                IRestResponse response = await client.ExecuteAsync(request);
+                var response = await client.ExecuteAsync(request);
 
-                var deserializeObject = JsonConvert.DeserializeObject<T>(response.Content);
+                var result = ValidateResponse<T>(response);
 
-                return deserializeObject;
+
+                return result;
                 //TODO: Logging ex
             }
             catch (WebException we)
@@ -67,11 +67,17 @@ namespace AllegroApi.Repository
             }
         }
 
-        public Task<UploadImageResult> UploadImage(Uri uri)
+        private static T ValidateResponse<T>(IRestResponse response)
         {
-            throw new NotImplementedException();
-        }
+            var allegroError = JsonConvert.DeserializeObject<AllegroErrorResponse>(response.Content);
+            if (allegroError != null && (!string.IsNullOrEmpty(allegroError.Error) || !string.IsNullOrEmpty(allegroError.ErrorDescription)))
+            {
+                throw new Exception(allegroError.Error);
+            }
 
+            var deserializeObject = JsonConvert.DeserializeObject<T>(response.Content);
+            return deserializeObject;
+        }
         private static RestRequest Request(IRequestAllegro query, Method method)
         {
             var request = new RestRequest(method);
