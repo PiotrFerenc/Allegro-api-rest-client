@@ -88,21 +88,26 @@ namespace AllegroApi.Builders
                 Id = id
             };
         }
-        //TODO: dodać obiekt produkt
-        public void SetProduct(object product)
-        {
-            _newOffer.Product = product;
-        }
         
         public void SetParameters(List<Parameter> parameter)
         {
             _newOffer.Parameters = parameter;
         }
         
+        //TODO: dodać obiekt produkt
+        public void SetProduct(object product)
+        {
+            _newOffer.Product = product;
+        }
         //TODO: dodać obiekt Ean
         public void SeEan(object ean)
         {
             _newOffer.Ean = ean;
+        }
+        //TODO: dodać obiekt CompatibilityList
+        public void SeCompatibilityList(object compatibilityList)
+        {
+            _newOffer.CompatibilityList = compatibilityList;
         }
         
         public void SetDescription(Description description)
@@ -110,10 +115,6 @@ namespace AllegroApi.Builders
             _newOffer.Description = description;
         }
         
-        //TODO: dodać obiekt CompatibilityList
-        public void SeCompatibilityList(object compatibilityList)
-        {
-            _newOffer.CompatibilityList = compatibilityList;
-        }
+
     }
 }
