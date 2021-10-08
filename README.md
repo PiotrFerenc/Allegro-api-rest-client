@@ -1,3 +1,9 @@
+W trakcie 
+- 'zakończ i wystaw' 
+- kopiowanie ofert na inne konto 
+- budowanie ofert 
+- aktualizacja oferty o produkty 
+
 ﻿# Allegro api rest client
 
 Połączenie:
