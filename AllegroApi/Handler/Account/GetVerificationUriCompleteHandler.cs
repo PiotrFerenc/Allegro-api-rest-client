@@ -9,7 +9,9 @@ using MediatR;
 
 namespace AllegroApi.Handler.Account
 {
-    public class GetVerificationUriCompleteHandler : IRequestHandler<GetVerificationUriCompleteCommand, string>
+    public class
+        GetVerificationUriCompleteHandler : IRequestHandler<GetVerificationUriCompleteCommand, (string url, string
+            deviceCode)>
     {
         private readonly IAllegroAuthService _allegroAuthService;
 
@@ -18,14 +20,15 @@ namespace AllegroApi.Handler.Account
             _allegroAuthService = allegroAuthService;
         }
 
-        public async Task<string> Handle(GetVerificationUriCompleteCommand request, CancellationToken cancellationToken)
+        public async Task<(string url, string deviceCode)> Handle(GetVerificationUriCompleteCommand request,
+            CancellationToken cancellationToken)
         {
-            await ValidatorHelper.TryValidate<GetVerificationUriCompleteValidator, GetVerificationUriCompleteCommand>(request);
-
+            await ValidatorHelper
+                .TryValidate<GetVerificationUriCompleteValidator, GetVerificationUriCompleteCommand>(request);
 
             var deviceCode = await _allegroAuthService.GetDeviceCode(request.ClientId, request.AuthKey);
 
-            return deviceCode.verification_uri_complete;
+            return (url: deviceCode.verification_uri_complete, deviceCode: deviceCode.device_code);
         }
     }
 }
