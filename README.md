@@ -12,7 +12,27 @@ Połączenie:
 - MediatR
 - Autofac
 
-###### Authorization => token do Bearer
+###### Authorization 
+
+
+```c#
+var data = await client.Query(new GetVerificationUriCompleteCommand()
+{
+    AuthKey = **"EQWTGHD6765dD"**,
+    ClientId = "sdf7986g5sd8f76g"
+});
+
+//open browser with data.url
+
+var result   = await client.Query(new CheckAccountConfirmationCommand()
+{
+    Authorization = **"EQWTGHD6765dD"**,
+    DeviceCodeId = data.deviceCode
+});
+
+var authorization = result.deviceAuthToken.access_token;
+```
+
 
 ```C#
 var allegroApi = new AllegroRestClient();
@@ -28,7 +48,7 @@ https://developer.allegro.pl/documentation/#operation/getOfferUsingGET
 var result = await allegroApi.Query(new GetOfferByIdQuery()
 {
     OfferId = "10862116958",
-    Authorization = "auth-code"
+    Authorization = authorization
 });                
 ```
 
@@ -42,7 +62,7 @@ https://developer.allegro.pl/documentation/#operation/getOfferEvents
 var result = await allegroApi.Query(new GetOfferEventsQuery()
 {
     Type = GetOfferEventsQuery.OfferEventType.OFFER_ACTIVATED,
-    Authorization = "auth-code",
+    Authorization = authorization,
     Limit = 1000,
     From = "ID-EVENTU"
 });
@@ -57,7 +77,7 @@ https://developer.allegro.pl/documentation/#operation/searchOffersUsingGET
 ```C#
 var result = await allegroApi.Query(new GetAllOffersQuery()  
 {  
-    Authorization = "auth-code",  
+    Authorization = authorization,  
     PublicationStatus = PublicationStatus.Active  
 });
 ```
@@ -70,7 +90,7 @@ https://developer.allegro.pl/documentation/#operation/getListOfDeliveryMethodsUs
 ```C#
 var result = await allegroApi.Query(new GetDeliveryMethodsQuery()
 {
-    Authorization = "auth-code",
+    Authorization = authorization,
 });
 ```
 
@@ -81,7 +101,7 @@ https://developer.allegro.pl/news/2018-08-14-cenniki_dostawy/#list
 ```c#
 var result = await allegroApi.Query(new GetSellerShippingRatesQuery()
 {
-    Authorization = "auth-code",
+    Authorization = authorization,
     SellerId = "123456"
  });
 ```
@@ -91,7 +111,7 @@ var result = await allegroApi.Query(new GetSellerShippingRatesQuery()
 ```c#
 var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
 {
-    Authorization = "auth-code",
+    Authorization = authorization,
     SellerId = "123456"
 });
 ```
@@ -101,7 +121,7 @@ var result = await allegroApi.Query(new GetImpliedWarrantiesQuery()
 ```c#
 var result = await allegroApi.Query(new GetReturnPoliciesQuery()
 {
-    Authorization = "auth-code",
+    Authorization = authorization,
     SellerId = "123456"
 });
 ```
@@ -111,7 +131,7 @@ var result = await allegroApi.Query(new GetReturnPoliciesQuery()
 ```c#
 var result = await allegroApi.Query(new GetWarrantiesQuery()
 {
-    Authorization = "auth-code",
+    Authorization = authorization,
     SellerId = "123456"
 });
 ```
@@ -121,7 +141,7 @@ var auth = "auth-code";
                 
 var offer = await allegroApi.Query(new OfferByIdQuery()
 {
-    Authorization = auth,
+    Authorization = authorization,
     OfferId = "1234567890"
 });
 
@@ -129,7 +149,7 @@ Console.WriteLine(offer.Name);
                 
 var result = await allegroApi.Query(new CreateDraftOfferCommand()
 {
-    Authorization = auth,
+    Authorization = authorization,
     Offer = new NewOffer(offer)
 });
 
@@ -142,13 +162,13 @@ var auth = "auth-code";
 
 var offer = await allegroApi.Query(new OfferByIdQuery()
 {
-    Authorization = auth,
+    Authorization = authorization,
     OfferId = "1234567890"
 });
 
 var result = await allegroApi.Query(new UpdateOfferCommand()
 {
-    Authorization = auth,
+    Authorization = authorization,
     Offer = offer
 });
 ```
@@ -158,7 +178,7 @@ var result = await allegroApi.Query(new UpdateOfferCommand()
 ```c#
 var result = await allegroApi.Query(new PublishOffersCommand()
 {
-    Authorization = auth,
+    Authorization = authorization,
     Offers = new List<OfferId>()
     {
         new OfferId("11124109817")
