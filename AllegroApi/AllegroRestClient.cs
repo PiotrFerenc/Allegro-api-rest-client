@@ -17,6 +17,7 @@ namespace AllegroApi
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IApiRepository));
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IOfferService));
             builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(ISaleService));
+            builder.RegisterAssemblyTypes(typeof(AllegroRestClient).Assembly).As(typeof(IAllegroAuthService));
             builder.RegisterMediatR(typeof(AllegroRestClient).Assembly);
             var container = builder.Build();
 

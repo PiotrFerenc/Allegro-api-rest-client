@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
-using AllegroApi.Domain.AllegroOffer.Upload;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
@@ -62,6 +60,28 @@ namespace AllegroApi.Repository
             {
                 throw new WebException(e.Message);
             }
+        }
+
+        public async Task<T> Send<T>(string baseUrl, string resource, IDictionary<string, string> headers, IDictionary<string, string> parameters, Method method)
+        {
+            var client = new RestClient(baseUrl);
+
+            var request = new RestRequest(resource, method);
+            
+            foreach (var header in headers)
+            {
+                request.AddHeader(header.Key, header.Value);
+            }
+
+            foreach (var parameter in parameters)
+            {
+                request.AddParameter(parameter.Key,parameter.Value);
+            }
+            var response = await client.ExecuteAsync<T>(request);
+            
+            var result = ValidateResponse<T>(response);
+
+            return result;
         }
 
         private static T ValidateResponse<T>(IRestResponse response)
