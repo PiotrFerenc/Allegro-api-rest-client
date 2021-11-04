@@ -16,27 +16,30 @@ Połączenie:
 
 
 ```c#
-var data = await client.Query(new GetVerificationUriCompleteCommand()
+
+var clientId = "Client ID z zarejestrowanej aplikacji: https://apps.developer.allegro.pl/";
+var clientSecret = "Client Secret z zarejestrowanej aplikacji: https://apps.developer.allegro.pl/";
+var base64Key = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}"));
+
+var allegroApi = new AllegroRestClient();
+
+var data = await allegroApi.Query(new GetVerificationUriCompleteCommand()
 {
-    AuthKey = **"EQWTGHD6765dD"**,
-    ClientId = "sdf7986g5sd8f76g"
+    AuthKey = base64Key,
+    ClientId = clientId
 });
 
 //open browser with data.url
 
-var result   = await client.Query(new CheckAccountConfirmationCommand()
+var result = await allegroApi.Query(new CheckAccountConfirmationCommand()
 {
-    Authorization = **"EQWTGHD6765dD"**,
+    Authorization = base64Key,
     DeviceCodeId = data.deviceCode
 });
 
 var authorization = result.deviceAuthToken.access_token;
 ```
 
-
-```C#
-var allegroApi = new AllegroRestClient();
-```
 
 --------------------------------------------------------------------------
 
