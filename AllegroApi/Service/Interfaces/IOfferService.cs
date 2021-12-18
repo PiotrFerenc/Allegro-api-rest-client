@@ -4,6 +4,7 @@ using AllegroApi.Command.AllegroOffer;
 using AllegroApi.Domain.AllegroOffer;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.AllegroOffer.Publication;
+using AllegroApi.Domain.AllegroProduct;
 using AllegroApi.Query.AllegroOffer;
 
 namespace AllegroApi.Service.Interfaces
@@ -16,5 +17,6 @@ namespace AllegroApi.Service.Interfaces
         Task<Offer> CreateOffer(string authorization,NewOffer newOffer);
         Task UpdateOffer(string authorization,Offer newOffer);
         Task<CommandTask> PublishOffers(string authorization,PublishOffer offers);
+        Task<AllegroProduct> GetProducts(string requestAuthorization, string requestName);
     }
 }

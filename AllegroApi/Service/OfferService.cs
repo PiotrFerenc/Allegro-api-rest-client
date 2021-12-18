@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 using AllegroApi.Domain;
 using AllegroApi.Domain.AllegroOffer;
 using AllegroApi.Domain.AllegroOffer.Event;
-using AllegroApi.Domain.AllegroOffer.Image;
 using AllegroApi.Domain.AllegroOffer.Publication;
 using AllegroApi.Domain.AllegroOffer.Result;
 using AllegroApi.Domain.AllegroOffer.Upload;
+using AllegroApi.Domain.AllegroProduct;
 using AllegroApi.Extensions;
 using AllegroApi.Query.AllegroOffer;
 using AllegroApi.Repository;
 using AllegroApi.Service.Interfaces;
 using RestSharp;
+using Image = AllegroApi.Domain.AllegroOffer.Image.Image;
 
 namespace AllegroApi.Service
 {
@@ -38,7 +39,9 @@ namespace AllegroApi.Service
 
             return result;
         }
-        public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit, GetOfferEventsQuery.OfferEventType type)
+
+        public async Task<OfferEvents> GetOfferEventsAsync(string authorization, string @from, int limit,
+            GetOfferEventsQuery.OfferEventType type)
         {
             var uri = new Uri($"https://api.allegro.pl/sale/offer-events");
 
@@ -67,6 +70,7 @@ namespace AllegroApi.Service
 
             return result;
         }
+
         public async Task<List<Offer>> GetOffersAsync(string authorization, PublicationStatus publicationStatus)
         {
             var offersStatus = publicationStatus.ToString().ToUpper();
@@ -120,6 +124,7 @@ namespace AllegroApi.Service
 
             return result;
         }
+
         public async Task<Offer> CreateOffer(string authorization, NewOffer offer)
         {
             var options = RegexOptions.None;
@@ -163,6 +168,7 @@ namespace AllegroApi.Service
 
             return result;
         }
+
         public async Task UpdateOffer(string authorization, Offer newOffer)
         {
             await _apiRepository.SendCommand<object>(new RequestCommand()
@@ -173,6 +179,7 @@ namespace AllegroApi.Service
                 Data = newOffer
             });
         }
+
         public async Task<CommandTask> PublishOffers(string authorization, PublishOffer offers)
         {
             var result = await _apiRepository.SendCommand<CommandTask>(new RequestCommand()
@@ -181,6 +188,21 @@ namespace AllegroApi.Service
                 Authorization = authorization,
                 Method = Method.PUT,
                 Data = offers
+            });
+
+            return result;
+        }
+
+        public async Task<AllegroProduct> GetProducts(string authorization, string requestName)
+        {
+            var uri = new Uri($"https://api.allegro.pl/sale/products");
+            uri = uri.AddParameter("phrase", requestName);
+
+            var result = await _apiRepository.SendQuery<AllegroProduct>(new RequestQuery()
+            {
+                Uri = uri,
+                Authorization = authorization,
+                Method = Method.GET
             });
 
             return result;

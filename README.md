@@ -189,4 +189,21 @@ var result = await allegroApi.Query(new PublishOffersCommand()
 });
 ```
 
+**Publikowanie produktów**
+
+*Produkty pobierane są wegług nazwy. Dodatkowo wybierony jest najpodobniejszy za pomocą algorytmu Levenshtein distance. *
+
+```c#
+var products = await allegroApi.Query(new GetProductsByNameQuery()
+{
+    Authorization = authorization,
+    Name = "Łożysko stożkowe ZVL 32315A"
+});
+
+Console.WriteLine("Łożysko stożkowe ZVL 32315A" );
+Console.WriteLine(products.bestProductByName.Name);
+```
+
+
+
 PS: NIE MA NAPISANYCH TESTÓW
