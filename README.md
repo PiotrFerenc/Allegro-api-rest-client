@@ -204,6 +204,9 @@ Console.WriteLine("Łożysko stożkowe ZVL 32315A" );
 Console.WriteLine(products.bestProductByName.Name);
 ```
 
-
+````text
+Łożysko stożkowe ZVL 32315A
+ŁOŻYSKO STOŻKOWE ZVL 32315 A 75x160x58
+````
 
 PS: NIE MA NAPISANYCH TESTÓW
