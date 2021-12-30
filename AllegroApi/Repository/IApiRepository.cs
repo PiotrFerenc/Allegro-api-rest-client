@@ -11,6 +11,7 @@ namespace AllegroApi.Repository
     {
         Task<T> SendQuery<T>(RequestQuery query);
         Task<T> SendCommand<T>(RequestCommand command);
+        Task<UploadImageResult> UploadImage(ImageRequestCommand command);
         Task<T> Send<T>(string baseUrl,string resource, IDictionary<string, string> headers, IDictionary<string, string> parameters, Method method);
     }
 }

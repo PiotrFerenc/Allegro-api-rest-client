@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using AllegroApi.Domain;
+using AllegroApi.Domain.AllegroOffer.Upload;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
@@ -60,6 +61,24 @@ namespace AllegroApi.Repository
             {
                 throw new WebException(e.Message);
             }
+        }
+
+        public async Task<UploadImageResult> UploadImage(ImageRequestCommand command)
+        {
+            var client = new RestClient("https://upload.allegro.pl/sale/images")
+            {
+                Timeout = -1
+            };
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "image/png");
+            request.AddHeader("Accept", "application/vnd.allegro.public.v1+json");
+            request.AddHeader("Authorization", "Bearer " +command.Authorization);
+
+            request.AddParameter("image/png", command.Image, ParameterType.RequestBody);
+
+            var response = await client.ExecuteAsync<UploadImageResult>(request);
+
+            return response.Data;
         }
 
         public async Task<T> Send<T>(string baseUrl, string resource, IDictionary<string, string> headers, IDictionary<string, string> parameters, Method method)

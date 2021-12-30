@@ -4,6 +4,7 @@ using AllegroApi.Command.AllegroOffer;
 using AllegroApi.Domain.AllegroOffer;
 using AllegroApi.Domain.AllegroOffer.Event;
 using AllegroApi.Domain.AllegroOffer.Publication;
+using AllegroApi.Domain.AllegroOffer.Upload;
 using AllegroApi.Domain.AllegroProduct;
 using AllegroApi.Query.AllegroOffer;
 
@@ -18,5 +19,6 @@ namespace AllegroApi.Service.Interfaces
         Task UpdateOffer(string authorization,Offer newOffer);
         Task<CommandTask> PublishOffers(string authorization,PublishOffer offers);
         Task<AllegroProduct> GetProducts(string requestAuthorization, string requestName);
+        Task<UploadImageResult> UploadImage(string requestAuthorization, byte[] file);
     }
 }

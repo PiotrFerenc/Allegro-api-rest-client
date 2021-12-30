@@ -134,30 +134,6 @@ namespace AllegroApi.Service
                 s.Content = regex.Replace(s.Content, " ");
             }
 
-            var offerImages = offer.Images.Select(x => x.Url);
-
-            offer.Images = new List<Image>();
-
-            foreach (var image in offerImages)
-            {
-                var uploadImage = await _apiRepository.SendCommand<UploadImageResult>(new RequestCommand()
-                {
-                    Uri = new Uri("https://upload.allegro.pl/sale/images"),
-                    Authorization = authorization,
-                    Method = Method.POST,
-                    Data = new
-                    {
-                        url = image
-                    }
-                });
-
-                offer.Images.Add(new Image()
-                {
-                    Url = uploadImage.location
-                });
-            }
-
-
             var result = await _apiRepository.SendCommand<Offer>(new RequestCommand()
             {
                 Uri = new Uri($"https://api.allegro.pl/sale/offers"),
@@ -206,6 +182,18 @@ namespace AllegroApi.Service
             });
 
             return result;
+        }
+
+        public async Task<UploadImageResult> UploadImage(string requestAuthorization, byte[] file)
+        {
+            var uploadImage = await _apiRepository.UploadImage(new ImageRequestCommand()
+            {
+                Uri = new Uri("https://upload.allegro.pl/sale/images"),
+                Authorization = requestAuthorization,
+                Method = Method.POST,
+                Image = file
+            });
+            return uploadImage;
         }
     }
 }

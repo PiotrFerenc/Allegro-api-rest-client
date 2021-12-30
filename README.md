@@ -209,4 +209,15 @@ Console.WriteLine(products.bestProductByName.Name);
 ŁOŻYSKO STOŻKOWE ZVL 32315 A 75x160x58
 ````
 
+**Upload zdjęć z dysku**
+
+````c#
+var file = File.ReadAllBytes(@"C:\image.png");
+var link = await allegroApi.Query(new UploadImageCommand()
+{
+    Authorization = authorization,
+    File = file
+});
+````
+
 PS: NIE MA NAPISANYCH TESTÓW
