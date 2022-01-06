@@ -6,6 +6,7 @@ using AllegroApi.Domain.AllegroImpliedWarranties;
 using AllegroApi.Domain.AllegroReturnPolicies;
 using AllegroApi.Domain.AllegroShippingRates;
 using AllegroApi.Domain.AllegroWarranties;
+using AllegroApi.Domain.Pos;
 using AllegroApi.Extensions;
 using AllegroApi.Repository;
 using AllegroApi.Service.Interfaces;
@@ -83,6 +84,18 @@ namespace AllegroApi.Service
             var result = await _apiRepository.SendQuery<Warranties>(new RequestQuery()
             {
                 Uri = uri,
+                Authorization = authorization,
+                Method = Method.GET
+            });
+
+            return result;
+        }
+
+        public async Task<Pos> GetPosListAsync(string authorization, string sellerId)
+        {
+            var result = await _apiRepository.SendQuery<Pos>(new RequestQuery()
+            {
+                Uri = new Uri("https://api.allegro.pl/points-of-service").AddParameter("seller.id", sellerId),
                 Authorization = authorization,
                 Method = Method.GET
             });

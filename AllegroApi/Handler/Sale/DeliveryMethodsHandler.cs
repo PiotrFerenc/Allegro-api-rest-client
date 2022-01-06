@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AllegroApi.Domain.AllegroDeliveryMethods;
 using AllegroApi.Domain.Validator;
@@ -11,7 +9,7 @@ using MediatR;
 
 namespace AllegroApi.Handler.Sale
 {
-    
+
     public class DeliveryMethodsHandler: IRequestHandler<GetDeliveryMethodsQuery, ListOfDeliveryMethods>
     {
         private readonly ISaleService _sellerService;

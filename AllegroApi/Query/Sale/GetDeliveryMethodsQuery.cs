@@ -6,4 +6,5 @@ namespace AllegroApi.Query.Sale
     public class GetDeliveryMethodsQuery : AuthorizationToken , IRequest<ListOfDeliveryMethods>
     {
     }
+
 }

@@ -40,7 +40,11 @@ var result = await allegroApi.Query(new CheckAccountConfirmationCommand()
 var authorization = result.deviceAuthToken.access_token;
 ```
 
-
+**Pobieranie Seller.id
+````c#
+    var token = new JWT.Builder.JwtBuilder().Decode<Token>(authorization);
+    var sellerId = token.user_name
+````
 --------------------------------------------------------------------------
 
 ###### **Pobieranie szczegółów oferty:**
@@ -138,6 +142,19 @@ var result = await allegroApi.Query(new GetWarrantiesQuery()
     SellerId = "123456"
 });
 ```
+
+**Punkty odbioru osobistego**
+
+```c#
+
+var pos = await allegroApi.Query(new GetPosQuery()
+{
+    Authorization = authorization,
+    sellerId = "123456"
+});
+```
+
+
 **Wystawianie ofert**
 ```c#
 var auth = "auth-code";
@@ -189,7 +206,7 @@ var result = await allegroApi.Query(new PublishOffersCommand()
 });
 ```
 
-**Publikowanie produktów**
+**Pobieranie produktów**
 
 *Produkty pobierane są wegług nazwy. Dodatkowo wybierony jest najpodobniejszy za pomocą algorytmu Levenshtein distance. *
 
