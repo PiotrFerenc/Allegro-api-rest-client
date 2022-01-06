@@ -34,7 +34,7 @@ var result = await allegroApi.Query(new CheckAccountConfirmationCommand()
 var authorization = result.deviceAuthToken.access_token;
 ```
 
-**Pobieranie Seller.id
+**Pobieranie Seller.id**
 ````c#
     var token = new JWT.Builder.JwtBuilder().Decode<Token>(authorization);
     var sellerId = token.user_name
